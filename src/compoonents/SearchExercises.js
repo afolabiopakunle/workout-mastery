@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Button, Stack, TextField, Typography} from "@mui/material";
 import {fetchData, exerciseOptions} from "../utils/fetchData";
+import HorizontalScroll from "./HorizontalScroll";
 
 function SearchExercises(props) {
 
@@ -60,7 +61,7 @@ function SearchExercises(props) {
                 </Button>
             </Box>
             <Box sx={{position: 'relative', width: '100%', p: '20px'}}>
-
+                <HorizontalScroll data={bodyParts} />
             </Box>
         </Stack>
     );
