@@ -1,15 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Button, Stack, TextField, Typography} from "@mui/material";
 import {fetchData, exerciseOptions} from "../utils/fetchData";
 
 function SearchExercises(props) {
 
     const [search, setSearch] = useState('');
+    const [exercises, setExercises] = useState([]);
+    const [bodyParts, setBodyParts] = useState([]);
+
+    useEffect(() => {
+        const fetchExercisesData = async () => {
+            const bodyPartData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions)
+            setBodyParts(['all', ...bodyPartData])
+        }
+
+        fetchExercisesData()
+    }, [])
 
     const handleSearch = async () => {
         if(search) {
-            const exerciseData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions)
-            console.log(exerciseData)
+            const exerciseData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions)
+            const searchedExercises = exerciseData.filter((exercise) => {
+                return exercise.name.toLowerCase().includes(search) || exercise.target.toLowerCase().includes(search)
+                || exercise.equipment.toLowerCase().includes(search) || exercise.bodyPart.toLowerCase().includes(search)
+            })
+            setSearch('');
+            setExercises(searchedExercises)
         }
     }
     return (
@@ -42,6 +58,9 @@ function SearchExercises(props) {
                 fontSize: {lg: '20px', xs: '14px'}}} >
                     Search
                 </Button>
+            </Box>
+            <Box sx={{position: 'relative', width: '100%', p: '20px'}}>
+
             </Box>
         </Stack>
     );
