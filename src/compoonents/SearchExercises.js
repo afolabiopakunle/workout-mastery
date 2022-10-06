@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Box, Button, Stack, TextField, Typography} from "@mui/material";
 
 function SearchExercises(props) {
+
+    const [search, setSearch] = useState('')
     return (
         <Stack alignItems={'center'} mt={'37px'} justifyContent={'center'} p={'20px'}>
             <Typography fontWeight={700} sx={{
@@ -26,7 +28,7 @@ function SearchExercises(props) {
                     placeholder='Search Exercises'
                     type='text'
                 />
-                <Button className={'search-btn'} sx={{ bgcolor: '#ff2625', color: 'white',
+                <Button className={'search-btn'} sx={{ bgcolor: '#ff2625', color: 'white', height: '56px',
                 width: {lg: '175px', xs: '80px'},
                 fontSize: {lg: '20px', xs: '14px'}}} >
                     Search
