@@ -1,7 +1,8 @@
 import React from 'react';
 import {Box} from "@mui/material";
+import BodyPart from "./BodyPart";
 
-function HorizontalScroll({data}) {
+function HorizontalScroll({data, bodyPart, setBodyPart}) {
     return (
         <div>
             {data.map((item) => (
@@ -10,7 +11,7 @@ function HorizontalScroll({data}) {
                     itemId={item.id || item}
                     title={item.id || item}
                     m='0 40px'>
-                    {item}
+                    <BodyPart item={item} bodyPart={bodyPart} setBodyPart={setBodyPart}/>
                 </Box>))}
         </div>
     );

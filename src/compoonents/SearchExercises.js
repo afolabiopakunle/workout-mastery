@@ -3,10 +3,10 @@ import {Box, Button, Stack, TextField, Typography} from "@mui/material";
 import {fetchData, exerciseOptions} from "../utils/fetchData";
 import HorizontalScroll from "./HorizontalScroll";
 
-function SearchExercises(props) {
+function SearchExercises({setExercises, bodyPart, setBodyPart}) {
 
     const [search, setSearch] = useState('');
-    const [exercises, setExercises] = useState([]);
+    const [exercises, setExercisesState] = useState([]);
     const [bodyParts, setBodyParts] = useState([]);
 
     useEffect(() => {
@@ -61,7 +61,7 @@ function SearchExercises(props) {
                 </Button>
             </Box>
             <Box sx={{position: 'relative', width: '100%', p: '20px'}}>
-                <HorizontalScroll data={bodyParts} />
+                <HorizontalScroll data={bodyParts} bodyPart={bodyPart} setBodyPart={setBodyPart} />
             </Box>
         </Stack>
     );
